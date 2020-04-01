@@ -1,0 +1,40 @@
+title: "Termanteus"
+description: "CS Student"
+locale: en
+url:
+
+links:
+  mail:
+    URL: mailto:termanteus@gmail.com
+    icon: fas fa-at
+  facebook:
+    URL: https://facebook.com/termanteus
+    icon: fab fa-facebook-f
+  github:
+    URL: https://github.com/bomcon123456
+    icon: fab fa-github-alt
+  linkedin:
+    URL: https://www.linkedin.com/in/trung-dao-6a8625144/
+    icon: fab fa-linkedin-in
+  kaggle:
+    URL: https://kaggle.com/termanteus
+    icon: fab fa-kaggle
+  goodreads:
+    URL: https://www.goodreads.com/user/show/106769734-trung-dao
+    icon: fas fa-book
+
+github_username: bomcon123456
+github_repo: bomcon123456.github.io
+
+# google_analytics: UA-135929937-1
+fa: https://kit.fontawesome.com/82d16f5581.js
+
+plugins:
+  - jekyll-feed
+
+markdown: kramdown
+kramdown:
+  highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false

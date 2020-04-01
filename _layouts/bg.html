@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+        <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    
+        {% assign user_url = site.url | append: site.baseurl %}
+        {% assign full_base_url = user_url | default: site.github.url %}
+        <link rel="stylesheet" href="/assets/style.css">
+    
+        <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    </head>    
+<body>
+<div style="height: 100%">
+<div id="particles-js" style="position: fixed; z-index: inherit; display: flex; justify-content: center; width: 100%; height: 100%;">
+</div>
+<script src="{{ site.url }}/assets/particles.js/particles.js"></script>
+<script src="{{ site.url }}/assets/particles.js/dir/js/app.js"></script>
+</div>
+</body>
+
+</html>

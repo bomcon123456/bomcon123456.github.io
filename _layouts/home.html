@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+
+  <body>
+    <div>
+      <header class="header-background">
+        {% include particles.html %}
+        <div class="clearfix border-bottom-thick header-border">
+          {% include navbar.html %}
+        </div>
+        <div class="container mx-auto px-2 mb-2 clearfix header-text">
+          <h1
+            class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title"
+          >
+            {{ site.title }}
+          </h1>
+
+          <div class="clearfix mb-4 py-1">
+            <div class="col-4 sm-width-full left border-top-thin">
+              <div class="table">
+                {% for link in site.links %}
+                <div class="inline-block mt-3 mr-1">
+                  <a
+                    href="{{ link[1].URL }}"
+                    target="_blank"
+                    class="link-social block"
+                  >
+                    <i class="{{ link[1].icon }}"></i>
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+              <!-- Set site description in config.yml -->
+              <p class="h4 lh-condensed font-smoothing mt-2 py-1">
+                {{ site.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="container mx-auto px-2 py-4">
+        {% for post in site.posts %} {% include post_block.html %} {% endfor %}
+      </div>
+    </div>
+
+    {% include footer.html %}
+  </body>
+</html>
