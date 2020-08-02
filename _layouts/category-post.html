@@ -21,8 +21,8 @@ layout: default
         itemprop="datePublished"
         >{{ page.date | date: "%b %-d, %Y" }}
       </time>
-      | {% assign words = content | strip_html | number_of_words %} {% if words
-      < 360 %} 1 min {% else %} { { words | divided_by:180 } } mins {% endif %}
+      | {% assign words = content | number_of_words %} {% if words < 360 %} 1
+      min {% else %} {{ words | divided_by:180 }} mins {% endif %}
     </p>
   </div>
 
