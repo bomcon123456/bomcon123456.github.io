@@ -4,8 +4,10 @@
   position: absolute;
   z-index: 0;
 }
-.MathJax {
-  font-size: 1.3em !important;
+
+.MathJax,
+.MathJax_Display {
+  font-size: 130% !important;
 }
 /* Type utilities */
 
