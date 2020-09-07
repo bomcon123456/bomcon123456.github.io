@@ -45,7 +45,7 @@ categories: paper-recap
     - Use FP16 to train since new hardware may have enhanced arithmetic logic unit for lower precision data types.
 
 <p align="center">
-  <img src="/assets/images/bot/efficient_training.png" style="width: 50%;" alt="efficient_training">
+  <img src="/assets/images/bot/efficient_training.png" style="width: 85%;" alt="efficient_training">
 </p>
 
 ### Model Tweaks
@@ -65,34 +65,33 @@ categories: paper-recap
 <p align="center">
   <img src="/assets/images/bot/resnet_tweak.png" style="width: 50%;" alt="resnet_tweak">
 </p>
-    - **Resnet-B**: modifies downsampling block
-        - Observation: convolution in path A (original) ignores \\(\frac{3}{4}\\) of the input feature map because it uses a kernel size 1×1 with a stride of 2.
-        - Tweak: Change stride of the first two conv, so no information is ignored.
-    - **Resnet-C**: modifies input stem
-        - Observation: the computational cost of a convolution is quadratic to the kernel width or height (A 7 × 7 convolution is 5.4 times more expensive than a 3 × 3 convolution).
-        - Tweak: replacing the 7×7 convolution with 3 conservative 3 × 3 convolutions, with the first and second convolutions have their output channel of 32 and a stride of 2, while the last convolution uses a 64 output channel.
-    - **Resnet-D**: modifies downsampling block
-        - Observation: Inspired by Resnet-B, 1×1 convolution in the path B also ignores \\(\frac{3}{4}\\) of input feature maps.
-        - Tweak: Change stride to 1 and add a 2×2 average pooling layer with a stride of 2 before the convolution, since it works well in practice and impacts the computational cost little.
+- **Resnet-B**: modifies downsampling block
+    - Observation: convolution in path A (original) ignores \\(\frac{3}{4}\\) of the input feature map because it uses a kernel size 1×1 with a stride of 2.
+    - Tweak: Change stride of the first two conv, so no information is ignored.
+- **Resnet-C**: modifies input stem
+    - Observation: the computational cost of a convolution is quadratic to the kernel width or height (A 7 × 7 convolution is 5.4 times more expensive than a 3 × 3 convolution).
+    - Tweak: replacing the 7×7 convolution with 3 conservative 3 × 3 convolutions, with the first and second convolutions have their output channel of 32 and a stride of 2, while the last convolution uses a 64 output channel.
+- **Resnet-D**: modifies downsampling block
+    - Observation: Inspired by Resnet-B, 1×1 convolution in the path B also ignores \\(\frac{3}{4}\\) of input feature maps.
+    - Tweak: Change stride to 1 and add a 2×2 average pooling layer with a stride of 2 before the convolution, since it works well in practice and impacts the computational cost little.
 
 <p align="center">
   <img src="/assets/images/bot/resnet_tweak_res.png" style="width: 50%;" alt="resnet_tweak_res">
 </p>
 
 ### Training Refinements
-1. Cosine Learning Rate Decay: 
+- **Cosine Learning Rate Decay**: 
     - Method: Same as my previous post.
     - Result: Compared to the step decay, the cosine decay starts to decay the learning since the beginning but remains large until step decay reduces the learning rate by 10x, which potentially improves the training progress.
-
 <p align="center">
   <img src="/assets/images/bot/cosanneal.png" style="width: 50%;" alt="cosanneal">
 </p>
 
-2. Label Smoothing
+- **Label Smoothing**:
     - Method: Same as my previous post.
     - Result: Compared to the softmax, it encourages a finite output from the fully-connected layer and can generalize better.
-3. Knowledge Distillation: skipped.
-4. Mixup: Same as my previous post.
+- **Knowledge Distillation**: skipped.
+- **Mixup**: Same as my previous post.
 
 <p align="center">
   <img src="/assets/images/bot/refinements.png" style="width: 50%;" alt="refinements">
