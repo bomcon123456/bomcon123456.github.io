@@ -39,7 +39,7 @@ categories: paper-recap
     - Automatically down-weight the contribution of easy examples (inliers) during training and rapidly focus the model on hard examples.
     - Focal loss performs the _opposite role_ of a robust loss (e.g: Huber Loss): it focuses training on a sparse set of hard examples.
 
-\[
+\\[
 
     {p_t = \left\{
         \begin{array}{ll}
@@ -47,7 +47,7 @@ categories: paper-recap
             1-p & otherwise.
         \end{array}
     \right.}
-\]
+\\]
 ## Best practice
 
 
