@@ -40,12 +40,13 @@ categories: paper-recap
     - Focal loss performs the _opposite role_ of a robust loss (e.g: Huber Loss): it focuses training on a sparse set of hard examples.
 
 \begin{equation}
-  f(x)=\begin{cases}
-    1, & \text{if $x<0$}.\\
-    0, & \text{otherwise}.
-  \end{cases}
+  D_{it} =
+    \begin{cases}
+      1 & \text{if bank $i$ issues ABs at time $t$}\\
+      2 & \text{if bank $i$ issues CBs at time $t$}\\
+      0 & \text{otherwise}
+    \end{cases}       
 \end{equation}
-
 
 ## Best practice
 
