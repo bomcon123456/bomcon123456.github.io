@@ -40,10 +40,10 @@ categories: paper-recap
     - Focal loss performs the _opposite role_ of a robust loss (e.g: Huber Loss): it focuses training on a sparse set of hard examples.
 
 $$
-\sigma(s,i) = \left\{
+p_t = \left\{
     \begin{array}{ll}
-        \tau_{si} & \mbox{si } \{s,i\} \in E \\
-        \infty & \mbox{sinon.}
+        p & if \ y=1 \\
+        1-p & otherwise.
     \end{array}
 \right.
 $$
