@@ -72,7 +72,7 @@ categories: paper-recap
 ## Hidden gems💎💎💎
 - In practice \\(\alpha\\) (of Balanced CE) may be set by inverse class frequency or treated as a hyperparameter to set by cross validation.
 - One notable property of CE loss, which can be easily seen in the upper plot, is that even examples that are easily classified incur a loss with non-trivial magnitude. When summed over a large number of easy examples, these small loss values can overwhelm the rare class.
-- Two-stage detectors are often trained with the CE loss without use of \\(\alpha\\-balancing, but address class imbalance through two mechanisms: (1) a two-stage cascade and (2) biased minibatch sampling.
+- Two-stage detectors are often trained with the CE loss without use of \\(\alpha\\)-balancing, but address class imbalance through two mechanisms: (1) a two-stage cascade and (2) biased minibatch sampling.
 - Feature Pyramid Network augments a standard convolutional network with a top-down pathway and lateral connections so the network efficiently constructs a rich, multi-scale feature pyramid from a single resolution input image.
 - Larger backbone networks yield higher accuracy, but also slower inference speeds, likewise for input image scale.
 
@@ -86,7 +86,7 @@ categories: paper-recap
 
 ## Results
 <p align="center">
-    <img src="/assets/images/focal/result.png" style="width: 50%;" alt="result">
+    <img src="/assets/images/focal/result.png" style="width: 80%;" alt="result">
 </p>
 - The model achieves top results, outperforming both one-stage and two-stage models.
 
@@ -97,7 +97,7 @@ categories: paper-recap
 - The approach is simple and highly effective.
 
 ### Rating
-![rating](https://media.giphy.com/media/z8rEcJ6I0hiUM/giphy.gif)
+![rating](https://media.giphy.com/media/3o6vY7UsuMPx3Yj9Xa/giphy.gif)
 
 ## Paper implementation
 ```python
