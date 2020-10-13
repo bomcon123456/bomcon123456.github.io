@@ -39,15 +39,7 @@ categories: paper-recap
     - Automatically down-weight the contribution of easy examples (inliers) during training and rapidly focus the model on hard examples.
     - Focal loss performs the _opposite role_ of a robust loss (e.g: Huber Loss): it focuses training on a sparse set of hard examples.
 
-$$
-p_t = \left\{
-\begin{tabular}{@{}c@{}}
-list item 1 \\
-list item 2 \\
-list item 3
-\end{tabular}
-\right.
-$$
+$$ M_p = \\left\\{ \\begin{matrix}\\begin{array}{r l} \\begin{matrix}\\begin{array}{r} \\frac{t^2}{\\gamma_m}\\left(0.29\\sigma_{R4}+0.16\\sigma_{R1}\\right) \\end{array}\\end{matrix} & \\text{if}\\; \\rho = 0\\% \\\\ \\begin{matrix}\\begin{array}{r} \\frac{t^2}{\\gamma_m}\\left(0.29\\sigma_{R4}+0.16\\sigma_{R1}\\right) + \\\\ \\frac{A_s\\,f_{yk}\\left(d-0.048\\,t\\right)}{\\gamma_s} \\end{array}\\end{matrix} & \\text{if}\\; 0\\% <  \\rho \\leq 0.15\\% \\\\ \\begin{matrix}\\begin{array}{r} \\frac{0.5(\\sigma_{R1}\\,\\sigma_{R4})(t-t_{ux})(0.28\\,t_{ux}+0.33\\,t)}{\\gamma_m} + \\\\ \\frac{\\sigma_{R4}(t-t_{ux})(0.11\\,t_{ux}+0.5\\,t)}{\\gamma_m} + \\\\ \\frac{A_s\\,f_{yk}(d-0.039\\,t_{ux})}{\\gamma_s} \\end{array}\\end{matrix} & \\text{if}\\; \\rho > 0.15\\% \\end{array}\\end{matrix} \\right. $$
 ## Best practice
 
 
