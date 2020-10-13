@@ -39,17 +39,13 @@ categories: paper-recap
     - Automatically down-weight the contribution of easy examples (inliers) during training and rapidly focus the model on hard examples.
     - Focal loss performs the _opposite role_ of a robust loss (e.g: Huber Loss): it focuses training on a sparse set of hard examples.
 
-\usepackage{amsmath}
-
-\begin{equation}
-  D_{it} =
-    \begin{cases}
-      1 & \text{if bank $i$ issues ABs at time $t$}\\
-      2 & \text{if bank $i$ issues CBs at time $t$}\\
-      0 & \text{otherwise}
-    \end{cases}       
-\end{equation}
-
+$p_t = \left\{
+\begin{tabular}{@{}c@{}}
+list item 1 \\
+list item 2 \\
+list item 3
+\end{tabular}
+\right.$
 ## Best practice
 
 
