@@ -139,8 +139,8 @@ class FocalLoss(nn.Module):
 ```
 
 ## Cited references and used images from:
-[Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002)
-[Reddit post](https://www.reddit.com/r/computervision/comments/9blsrl/focal_loss_for_dense_object_detection_retinanet/)
+- [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002)
+- [Reddit post](https://www.reddit.com/r/computervision/comments/9blsrl/focal_loss_for_dense_object_detection_retinanet/)
 
 ## Papers needs to conquer next 👏👏👏
 - SIMCLR maybe?
