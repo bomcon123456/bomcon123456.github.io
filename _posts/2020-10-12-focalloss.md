@@ -50,6 +50,13 @@ categories: paper-recap
         \right.
     $$
 </p>
+    
+    - Using this definition, we can define CE loss func like this: \\(CE(p,y) = CE(p_t) = -log(p_t)\\) for comparision.
+    - Focal Loss definition:
+
+$$
+    FL(p_t) = -(1-p_t)^{\gamma}log(p_t)
+$$
 
 ## Best practice
 
