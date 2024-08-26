@@ -1,50 +1,128 @@
 <!DOCTYPE html>
 <html>
-  {% include head.html %}
-
-  <body>
-    <div>
+   {% include head.html %}
+   <body>
+      <div>
       <header class="header-background">
-        {% include particles.html %}
-        <div class="clearfix border-bottom-thick header-border">
-          {% include navbar.html %}
-        </div>
-        <div class="container mx-auto px-2 mb-2 clearfix header-text">
-          <h1
-            class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title"
-          >
-            {{ site.title }}
-          </h1>
-
-          <div class="clearfix mb-4 py-1">
-            <div class="col-4 sm-width-full left border-top-thin">
-              <div class="table">
-                {% for link in site.links %}
-                <div class="inline-block mt-3 mr-1">
-                  <a
-                    href="{{ link[1].URL }}"
-                    target="_blank"
-                    class="link-social block"
-                  >
-                    <i class="{{ link[1].icon }}"></i>
-                  </a>
-                </div>
-                {% endfor %}
-              </div>
-              <!-- Set site description in config.yml -->
-              <p class="h4 lh-condensed font-smoothing mt-2 py-1">
-                {{ site.description }}
-              </p>
+         {% include particles.html %}
+         <div class="clearfix border-bottom-thick header-border">
+            {% include navbar.html %}
+         </div>
+         <div class="container mx-auto px-2 mb-2 clearfix header-text">
+            <h1
+               class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title"
+               >
+               {{ site.title }}
+            </h1>
+            <div class="clearfix mb-4 py-1">
+               <div class="col-12 sm-width-full left border-top-thin">
+                  <div class="table">
+                     {% for link in site.links %}
+                     <div class="inline-block mt-3 mr-1">
+                        <a
+                           href="{{ link[1].URL }}"
+                           target="_blank"
+                           class="link-social block"
+                           >
+                        <i class="{{ link[1].icon }}"></i>
+                        </a>
+                     </div>
+                     {% endfor %}
+                  </div>
+                  <!-- Set site description in config.yml -->
+                  <p class="h4 lh-condensed font-smoothing mt-2 py-1">
+                     {{ site.description }}
+                  </p>
+               </div>
             </div>
-          </div>
-        </div>
+         </div>
       </header>
-
-      <div class="container mx-auto px-2 py-4">
-        {% for post in site.posts %} {% include post_block.html %} {% endfor %}
-      </div>
-    </div>
-
-    {% include footer.html %}
-  </body>
+      <main class="container mx-auto px-2 mb-2">
+         <section id="news" class="content-section">
+            <h2>🌟 News</h2>
+            <table style="border-collapse: collapse;">
+               {% for item in site.data.news %}
+               <tr>
+                  <td style="border: none; padding: 5px;">
+                     <strong style="color: #EECAD5;">[{{ item.date | date: "%m/%Y" }}]</strong>
+                  </td>
+                  <td style="border: none; padding: 5px;">
+                     {{ item.content }}
+                  </td>
+               </tr>
+               {% endfor %}
+            </table>
+         </section>
+         <h2 class="title is-3">Publications<br><small><small><sup>* means equal contribution</sup></small></small></h2>
+         {% assign authors = site.data.authors %}
+         {% assign publications = site.data.publications %}
+         {% for publication in publications %}
+          <div class="publication">
+            <div class="publication-header">
+              <div class="publication-image">
+                <img src="./images/{{ publication.image }}" alt="{{ publication.title }}">
+                <video class="publication-video" autoplay preload playsinline loop muted>
+                  <source src="./images/{{ publication.image_mouseover }}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+             <div class="publication-details">
+                <h3 class="publication-title">{{ publication.title }}</h3>
+                <p>Authors:
+                  {% assign author_list = "" %}
+                  {% for author in publication.authors %}
+                    {% assign author_details = authors[author.author_id] %}
+                    {% assign full_name = author_details.first_name %}
+                    {% if author_details.middle_name %}
+                      {% assign full_name = full_name | append: " " | append: author_details.middle_name %}
+                    {% endif %}
+                    {% assign full_name = full_name | append: " " | append: author_details.last_name %}
+                    {% if author_details.is_me %}
+                      {% assign full_name = full_name | append: "<sup>" | append: author.sign | append: "</sup>" %}
+                    {% else %}
+                      {% assign full_name = "<a href='" | append: author_details.website | append: "'>" | append: full_name | append: "</a><sup>" | append: author.sign | append: "</sup>" %}
+                    {% endif %}
+                    {% if forloop.last %}
+                      {% assign author_list = author_list | append: full_name %}
+                    {% else %}
+                      {% assign author_list = author_list | append: full_name | append: ", " %}
+                    {% endif %}
+                  {% endfor %}
+                  {{ author_list }}
+                </p>
+                <div class="publication-venue">
+                   <span>{{ publication.venue }}</span>
+                   {% for award in publication.awards %}
+                   <span class="publication-venue-emph">{{ award }}</span>
+                   {% endfor %}
+                </div>
+                <p class="publication-description">{{ publication.description }}</p>
+                <!-- Publication Links. -->
+                <div class="publication-links buttons field has-addons">
+                   {% if publication.project_page %}
+                   <a class="external-link button is-small is-ghost" href="{{ publication.project_page }}">
+                   <span class="icon"><i class="fas fa-globe-asia"></i></span>
+                   <span>Project Page</span>
+                   </a>
+                   {% endif %}
+                   {% if publication.arxiv %}
+                   <a class="external-link button is-small is-ghost" href="https://arxiv.org/abs/{{ publication.arxiv }}">
+                   <span class="icon"><i class="ai ai-arxiv"></i></span>
+                   <span>arXiv</span>
+                   </a>
+                   {% endif %}
+                   {% if publication.github %}
+                   <a class="external-link button is-small is-ghost" href="https://github.com/{{ publication.github }}">
+                   <span class="icon"><i class="fa fab fa-github"></i></span>
+                   <span>GitHub</span>
+                   </a>
+                   {% endif %}
+                </div>
+             </div>
+          </div>
+         </div>
+         {% endfor %}
+      </main>
+      {% include footer.html %}
+   </body>
 </html>

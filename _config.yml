@@ -1,20 +1,17 @@
-title: "Termanteus"
-description: "CS Student"
+title: "Trung Dao"
+description: "Dao Tuan Trung is a Computer Vision Research Resident at VinAI Research, mentored by Dr. Cuong Pham and Dr. Anh Tran. Specializing in Deep Generative Models such as GANs and Diffusion Models for image processing, Trung brings valuable experience as a former AI Engineer skilled in training, deploying, and optimizing deep learning models. At VinAI Research, he has contributed to cutting-edge projects including Face Recognition, Traffic Sign/Light Recognition, and Noise Cancelling for edge devices, bridging the gap between the research and applied department."
 locale: en
-url:
+url: https://trung-dt.com
 
 links:
-  mail:
-    URL: mailto:termanteus@gmail.com
-    icon: fas fa-at
-  facebook:
-    URL: https://facebook.com/termanteus
-    icon: fab fa-facebook-f
+  scholar:
+    URL: https://scholar.google.com/citations?user=FZmxEYYAAAAJ&hl=en
+    icon: fa-brands fa-google-scholar
   github:
     URL: https://github.com/bomcon123456
     icon: fab fa-github-alt
   linkedin:
-    URL: https://www.linkedin.com/in/trung-dao-6a8625144/
+    URL: https://www.linkedin.com/in/trung-dt880
     icon: fab fa-linkedin-in
   kaggle:
     URL: https://kaggle.com/termanteus
@@ -23,11 +20,8 @@ links:
     URL: https://www.goodreads.com/user/show/106769734-trung-dao
     icon: fas fa-book
 
-github_username: bomcon123456
-github_repo: bomcon123456.github.io
-
 # google_analytics: UA-135929937-1
-fa: https://kit.fontawesome.com/82d16f5581.js
+fa: https://kit.fontawesome.com/a24e8ec4a3.js
 
 plugins:
   - jekyll-feed

@@ -1,0 +1,39 @@
+- id: swiftbrushv2
+  title: "SwiftBrush v2: Make Your One-step Diffusion Model Better Than Its Teacher"
+  venue: ECCV, 2024
+  description: "An improved SwiftBrush version that makes the one-step diffusion student beats its multi-step teacher."
+  project_page: "https://swiftbrushv2.github.io/"
+  github: VinAIResearch/SwiftBrushV2
+  image: swiftbrushv2_before.jpg
+  image_mouseover: swiftbrushv2_after.mp4
+  authors:
+    - author_id: "trungdt"
+      sign: ""
+    - author_id: "thuannh"
+      sign: "*"
+    - author_id: "thanhlv"
+      sign: "*"
+    - author_id: "ducvh"
+      sign: "*"
+    - author_id: "khoindm"
+      sign: ""
+    - author_id: "cuongpv"
+      sign: ""
+    - author_id: "anhtt"
+      sign: ""
+- id: efhq
+  title: "EFHQ: Multi-purpose ExtremePose-Face-HQ dataset."
+  venue: CVPR, 2024
+  description: "A multi-purpose dataset for extreme pose face, and high-quality for image generation tasks and for face recognition benchmarking."
+  project_page: "https://vinairesearch.github.io/EFHQ/"
+  github: VinAIResearch/EFHQ
+  arxiv: 2312.17205
+  image: efhq_before.png
+  image_mouseover: efhq_after.mp4
+  authors:
+    - author_id: "trungdt"
+      sign: "*"
+    - author_id: "ducvh"
+      sign: "*"
+    - author_id: "anhtt"
+      sign: ""

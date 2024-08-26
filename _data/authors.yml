@@ -1,0 +1,39 @@
+trungdt:
+  first_name: Trung
+  last_name: Dao
+  website: https://termanteus.com/
+  is_me: true
+thuannh:
+  first_name: Thuan
+  middle_name: Hoang	
+  last_name: Nguyen
+  website: https://thuanz123.github.io/
+thanhlv:
+  first_name: Thanh
+  middle_name: Van
+  last_name: Le
+  website: https://github.com/Luvata/
+anhtt:
+  first_name: Anh
+  last_name: Tran
+  website: https://scholar.google.com/citations?user=FYZ5ODQAAAAJ&hl/
+haopt:
+  first_name: Hao
+  last_name: Phung
+  website: https://hao-pt.github.io/
+quandm:
+  first_name: Quan
+  last_name: Dao
+  website: https://quandao10.github.io/
+ducvh:
+  first_name: Duc
+  last_name: Vu
+  website: https://scholar.google.com/citations?user=mUHCYJsAAAAJ
+khoindm:
+  first_name: Khoi
+  last_name: Nguyen
+  website: https://www.khoinguyen.org/
+cuongpv:
+  first_name: Cuong
+  last_name: Pham
+  website: https://sites.google.com/view/cuongpham/home

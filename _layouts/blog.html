@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+
+  <body>
+    <div>
+        {% include header.html %}
+      <!-- <header class="header-background">
+        {% include particles.html %}
+        <div class="clearfix border-bottom-thick header-border">
+          {% include navbar.html %}
+        </div>
+        <div class="container mx-auto px-2 mb-2 clearfix header-text">
+          <h1
+            class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title"
+          >
+            Blogs
+          </h1>
+
+        </div>
+      </header> -->
+
+      <div class="container mx-auto px-2 py-4">
+        {% for post in site.posts %} {% include post_block.html %} {% endfor %}
+      </div>
+
+      {% include footer.html %}
+    </div>
+  </body>
+</html>

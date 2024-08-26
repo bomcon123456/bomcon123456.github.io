@@ -139,3 +139,64 @@ code {
   }
 
 }
+
+a {
+  color: #D1E9F6;
+  text-decoration: none;
+  outline: 0;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+.publication {
+  margin-bottom: 20px;
+}
+
+.publication-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.publication-image {
+  margin-right: 20px;
+}
+
+.publication-image img,
+.publication-image video {
+  width: 150px;
+  height: auto;
+}
+
+.publication-image video {
+  display: none;
+}
+
+.publication-details {
+  flex: 1;
+}
+
+.publication-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.publication-venue {
+  font-weight: bold;
+}
+
+.publication-venue-emph {
+  font-style: italic;
+  margin-left: 10px;
+}
+
+.publication-description {
+  margin-top: 10px;
+}
+
+.publication-links {
+  margin-top: 10px;
+}

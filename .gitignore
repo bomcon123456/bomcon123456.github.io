@@ -3,5 +3,5 @@ vendor/
 .bundle/
 .idea/
 .sass-cache/
-
+public_html/
 .DS_Store
