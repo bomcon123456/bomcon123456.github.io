@@ -78,7 +78,7 @@
                     {% endif %}
                     {% assign full_name = full_name | append: " " | append: author_details.last_name %}
                     {% if author_details.is_me %}
-                      {% assign full_name = full_name | append: "<sup>" | append: author.sign | append: "</sup>" %}
+                      {% assign full_name = "<strong style='color: #EECAD5;'>" | append: full_name | append: "</strong><sup>" | append: author.sign | append: "</sup>" %}
                     {% else %}
                       {% assign full_name = "<a href='" | append: author_details.website | append: "'>" | append: full_name | append: "</a><sup>" | append: author.sign | append: "</sup>" %}
                     {% endif %}

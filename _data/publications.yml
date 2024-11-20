@@ -1,8 +1,31 @@
+- id: dimsum
+  title: "DiMSUM : Diffusion Mamba - A Scalable and Unified Spatial-Frequency Method for Image Generation"
+  venue: NeurIPS, 2024
+  description: " A hybrid Mamba-Transformer diffusion model that synergistically leverages both spatial and frequency information for high-quality image synthesis."
+  project_page: "https://hao-pt.github.io/dimsum/"
+  arxiv: 2411.04168
+  github: VinAIResearch/DiMSUM
+  image: dimsum_before.png
+  image_mouseover: dimsum_after.gif
+  authors:
+    - author_id: "haopt"
+      sign: "*"
+    - author_id: "quandm"
+      sign: "*"
+    - author_id: "trungdt"
+      sign: "*"
+    - author_id: "hoangpv"
+      sign: "*"
+    - author_id: "metaxas"
+      sign: ""
+    - author_id: "anhtt"
+      sign: ""
 - id: swiftbrushv2
   title: "SwiftBrush v2: Make Your One-step Diffusion Model Better Than Its Teacher"
   venue: ECCV, 2024
   description: "An improved SwiftBrush version that makes the one-step diffusion student beats its multi-step teacher."
   project_page: "https://swiftbrushv2.github.io/"
+  arxiv: 2408.14176
   github: VinAIResearch/SwiftBrushV2
   image: swiftbrushv2_before.jpg
   image_mouseover: swiftbrushv2_after.mp4

@@ -128,6 +128,9 @@ mjx-math {
 /* Layout utilities */
 .container {
   max-width: $container-width;
+ // width: 100%;
+  // margin: 0 auto;
+  // padding: 20px;
 }
 
 .col-1 {
@@ -774,3 +777,4 @@ mjx-math {
 }
 
 /* Generic.Inserted & Diff Inserted */
+

@@ -200,3 +200,41 @@ a:hover {
 .publication-links {
   margin-top: 10px;
 }
+
+.publication-links {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .publication-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .publication-image {
+    order: 1;
+    width: auto; /* Remove width: 100% */
+  }
+
+  .publication-details {
+    order: 2;
+    width: auto; /* Remove width: 100% */
+    text-align: center;
+  }
+
+  .publication img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .publication {
+    padding: 5px;
+  }
+}
