@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+   <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Trung Dao
+  </title>
+  <meta
+    name="description"
+    content="Dao Tuan Trung is a Computer Vision Research Resident at VinAI Research, mentored by Dr. Cuong Pham and Dr. Anh Tran. Specializing in Deep Generative Models such as GANs and Diffusion Models for image processing, Trung brings valuable experience as a former AI Engineer skilled in training, deploying, and optimizing deep learning models. At VinAI Research, he has contributed to cutting-edge projects including Face Recognition, Traffic Sign/Light Recognition, and Noise Cancelling for edge devices, bridging the gap between the research and applied department."
+  />
+
+   
+  <link rel="stylesheet" href="/assets/style.css" />
+
+  <link
+    rel="canonical"
+    href="https://trung-dt.com/"
+  />
+  <link rel="alternate" type="application/rss+xml" title="Trung Dao"
+  href="https://trung-dt.com/feed.xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="stylesheet" href="/assets/academicons.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+
+  <link rel="manifest" href="/site.webmanifest" />
+  <script async defer src="/assets/github-buttons.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: [
+        "MathMenu.js",
+        "MathZoom.js",
+        "AssistiveMML.js",
+        "a11y/accessibility-menu.js"
+      ],
+      jax: ["input/TeX", "output/CommonHTML"],
+      TeX: {
+        extensions: [
+          "AMSmath.js",
+          "AMSsymbols.js",
+          "noErrors.js",
+          "noUndefined.js",
+        ]
+      }
+    });
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      var TEX = MathJax.InputJax.TeX;
+      var COLS = function (W) {
+        var WW = [];
+        for (var i = 0, m = W.length; i < m; i++)
+          {WW[i] = TEX.Parse.prototype.Em(W[i])}
+        return WW.join(" ");
+      };
+      TEX.Definitions.Add({
+        environment: {
+          psmallmatrix: ['Array',null,'(',')','c',COLS([1/3]),".2em",'S',1],
+        }
+      });
+    });
+  </script>
+
+  <!-- Mathjax Support -->
+  <script
+    type="text/javascript"
+    async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"
+  ></script>
+
+
+ <script>
+  $(document).ready(function() {
+    console.log("hello"); // This will print "hello" to the console if the JavaScript is running
+
+    $('.publication').mouseover(function() {
+      console.log("Mouseover event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'block');
+        $(this).find('img').css('display', 'none');
+    });
+
+    $('.publication').mouseout(function() {
+      console.log("Mouseout event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'none');
+        $(this).find('img').css('display', 'block');
+    });
+  });
+</script> 
+  <script src="https://kit.fontawesome.com/a24e8ec4a3.js"></script>
+</head>
+
+   <body>
+      <div>
+      <header class="header-background">
+         <div id="particles-js" class="particles"></div>
+<script src="https://trung-dt.com/assets/particles.js/particles.js"></script>
+<script src="https://trung-dt.com/assets/particles.js/dir/js/app.js"></script>
+
+         <div class="clearfix border-bottom-thick header-border">
+            <ul class="list-reset right py-1 header-text font-smoothing">
+   
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/blog/"
+      target="_blank"
+      >🐢 Blogs</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/cv/"
+      target="_blank"
+      >🎓 CV</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/gallery/"
+      target="_blank"
+      >💎 Film Photos</a
+    >
+  </li>
+         
+</ul>
+
+         </div>
+         <div class="container mx-auto px-2 mb-2 clearfix header-text">
+            <h1
+               class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title"
+               >
+               Trung Dao
+            </h1>
+            <div class="clearfix mb-4 py-1">
+               <div class="col-12 sm-width-full left border-top-thin">
+                  <div class="table">
+                     
+                     <div class="inline-block mt-3 mr-1">
+                        <a
+                           href="https://scholar.google.com/citations?user=FZmxEYYAAAAJ&hl=en"
+                           target="_blank"
+                           class="link-social block"
+                           >
+                        <i class="fa-brands fa-google-scholar"></i>
+                        </a>
+                     </div>
+                     
+                     <div class="inline-block mt-3 mr-1">
+                        <a
+                           href="https://github.com/bomcon123456"
+                           target="_blank"
+                           class="link-social block"
+                           >
+                        <i class="fab fa-github-alt"></i>
+                        </a>
+                     </div>
+                     
+                     <div class="inline-block mt-3 mr-1">
+                        <a
+                           href="https://www.linkedin.com/in/trung-dt880"
+                           target="_blank"
+                           class="link-social block"
+                           >
+                        <i class="fab fa-linkedin-in"></i>
+                        </a>
+                     </div>
+                     
+                     <div class="inline-block mt-3 mr-1">
+                        <a
+                           href="https://kaggle.com/termanteus"
+                           target="_blank"
+                           class="link-social block"
+                           >
+                        <i class="fab fa-kaggle"></i>
+                        </a>
+                     </div>
+                     
+                     <div class="inline-block mt-3 mr-1">
+                        <a
+                           href="https://www.goodreads.com/user/show/106769734-trung-dao"
+                           target="_blank"
+                           class="link-social block"
+                           >
+                        <i class="fas fa-book"></i>
+                        </a>
+                     </div>
+                     
+                  </div>
+                  <!-- Set site description in config.yml -->
+                  <p class="h4 lh-condensed font-smoothing mt-2 py-1">
+                     Dao Tuan Trung is a Computer Vision Research Resident at VinAI Research, mentored by Dr. Cuong Pham and Dr. Anh Tran. Specializing in Deep Generative Models such as GANs and Diffusion Models for image processing, Trung brings valuable experience as a former AI Engineer skilled in training, deploying, and optimizing deep learning models. At VinAI Research, he has contributed to cutting-edge projects including Face Recognition, Traffic Sign/Light Recognition, and Noise Cancelling for edge devices, bridging the gap between the research and applied department.
+                  </p>
+               </div>
+            </div>
+         </div>
+      </header>
+      <main class="container mx-auto px-2 mb-2">
+         <section id="news" class="content-section">
+            <h2>🌟 News</h2>
+            <table style="border-collapse: collapse;">
+               
+               <tr>
+                  <td style="border: none; padding: 5px;">
+                     <strong style="color: #EECAD5;">[09/2024]</strong>
+                  </td>
+                  <td style="border: none; padding: 5px;">
+                     <a href='https://hao-pt.github.io/dimsum/' class='link-primary'>DiMSUM</a> has been accepted to NeurIPS 2024.
+                  </td>
+               </tr>
+               
+               <tr>
+                  <td style="border: none; padding: 5px;">
+                     <strong style="color: #EECAD5;">[07/2024]</strong>
+                  </td>
+                  <td style="border: none; padding: 5px;">
+                     <a href='https://swiftbrushv2.github.io' class='link-primary'>SwiftBrushV2</a> has been accepted to ECCV 2024.
+                  </td>
+               </tr>
+               
+               <tr>
+                  <td style="border: none; padding: 5px;">
+                     <strong style="color: #EECAD5;">[03/2024]</strong>
+                  </td>
+                  <td style="border: none; padding: 5px;">
+                     <a href='https://vinairesearch.github.io/EFHQ' class='link-primary'>EFHQ</a> has been accepted to CVPR 2024.
+                  </td>
+               </tr>
+               
+            </table>
+         </section>
+         <h2 class="title is-3">Publications<br><small><small><sup>* means equal contribution</sup></small></small></h2>
+         
+         
+         
+          <div class="publication">
+            <div class="publication-header">
+              <div class="publication-image">
+                <img src="./images/dimsum_before.png" alt="DiMSUM : Diffusion Mamba - A Scalable and Unified Spatial-Frequency Method for Image Generation">
+                <video class="publication-video" autoplay preload playsinline loop muted>
+                  <source src="./images/dimsum_after.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+             <div class="publication-details">
+                <h3 class="publication-title">DiMSUM : Diffusion Mamba - A Scalable and Unified Spatial-Frequency Method for Image Generation</h3>
+                <p>Authors:
+                  
+                  
+                  <a href='https://hao-pt.github.io/'>Hao Phung</a><sup>*</sup>, <a href='https://quandao10.github.io/'>Quan Dao</a><sup>*</sup>, <strong style='color: #EECAD5;'>Trung Dao</strong><sup></sup>, <a href='https://viethoang1512.github.io/'>Hoang Phan</a><sup></sup>, <a href='https://people.cs.rutgers.edu/~dnm/'>Dimitris Metaxas</a><sup></sup>, <a href='https://scholar.google.com/citations?user=FYZ5ODQAAAAJ&hl/'>Anh Tran</a><sup></sup>
+                </p>
+                <div class="publication-venue">
+                   <span>NeurIPS, 2024</span>
+                   
+                </div>
+                <p class="publication-description"> A hybrid Mamba-Transformer diffusion model that synergistically leverages both spatial and frequency information for high-quality image synthesis.</p>
+                <!-- Publication Links. -->
+                <div class="publication-links buttons field has-addons">
+                   
+                   <a class="external-link button is-small is-ghost" href="https://hao-pt.github.io/dimsum/">
+                   <span class="icon"><i class="fas fa-globe-asia"></i></span>
+                   <span>Project Page</span>
+                   </a>
+                   
+                   
+                   <a class="external-link button is-small is-ghost" href="https://arxiv.org/abs/2411.04168">
+                   <span class="icon"><i class="ai ai-arxiv"></i></span>
+                   <span>arXiv</span>
+                   </a>
+                   
+                   
+                   <a class="external-link button is-small is-ghost" href="https://github.com/VinAIResearch/DiMSUM">
+                   <span class="icon"><i class="fa fab fa-github"></i></span>
+                   <span>GitHub</span>
+                   </a>
+                   
+                </div>
+             </div>
+          </div>
+         </div>
+         
+          <div class="publication">
+            <div class="publication-header">
+              <div class="publication-image">
+                <img src="./images/swiftbrushv2_before.jpg" alt="SwiftBrush v2: Make Your One-step Diffusion Model Better Than Its Teacher">
+                <video class="publication-video" autoplay preload playsinline loop muted>
+                  <source src="./images/swiftbrushv2_after.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+             <div class="publication-details">
+                <h3 class="publication-title">SwiftBrush v2: Make Your One-step Diffusion Model Better Than Its Teacher</h3>
+                <p>Authors:
+                  
+                  
+                  <strong style='color: #EECAD5;'>Trung Dao</strong><sup></sup>, <a href='https://thuanz123.github.io/'>Thuan Hoang Nguyen</a><sup>*</sup>, <a href='https://github.com/Luvata/'>Thanh Van Le</a><sup>*</sup>, <a href='https://scholar.google.com/citations?user=mUHCYJsAAAAJ'>Duc Vu</a><sup>*</sup>, <a href='https://www.khoinguyen.org/'>Khoi Nguyen</a><sup></sup>, <a href='https://sites.google.com/view/cuongpham/home'>Cuong Pham</a><sup></sup>, <a href='https://scholar.google.com/citations?user=FYZ5ODQAAAAJ&hl/'>Anh Tran</a><sup></sup>
+                </p>
+                <div class="publication-venue">
+                   <span>ECCV, 2024</span>
+                   
+                </div>
+                <p class="publication-description">An improved SwiftBrush version that makes the one-step diffusion student beats its multi-step teacher.</p>
+                <!-- Publication Links. -->
+                <div class="publication-links buttons field has-addons">
+                   
+                   <a class="external-link button is-small is-ghost" href="https://swiftbrushv2.github.io/">
+                   <span class="icon"><i class="fas fa-globe-asia"></i></span>
+                   <span>Project Page</span>
+                   </a>
+                   
+                   
+                   <a class="external-link button is-small is-ghost" href="https://arxiv.org/abs/2408.14176">
+                   <span class="icon"><i class="ai ai-arxiv"></i></span>
+                   <span>arXiv</span>
+                   </a>
+                   
+                   
+                   <a class="external-link button is-small is-ghost" href="https://github.com/VinAIResearch/SwiftBrushV2">
+                   <span class="icon"><i class="fa fab fa-github"></i></span>
+                   <span>GitHub</span>
+                   </a>
+                   
+                </div>
+             </div>
+          </div>
+         </div>
+         
+          <div class="publication">
+            <div class="publication-header">
+              <div class="publication-image">
+                <img src="./images/efhq_before.png" alt="EFHQ: Multi-purpose ExtremePose-Face-HQ dataset.">
+                <video class="publication-video" autoplay preload playsinline loop muted>
+                  <source src="./images/efhq_after.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+             <div class="publication-details">
+                <h3 class="publication-title">EFHQ: Multi-purpose ExtremePose-Face-HQ dataset.</h3>
+                <p>Authors:
+                  
+                  
+                  <strong style='color: #EECAD5;'>Trung Dao</strong><sup>*</sup>, <a href='https://scholar.google.com/citations?user=mUHCYJsAAAAJ'>Duc Vu</a><sup>*</sup>, <a href='https://scholar.google.com/citations?user=FYZ5ODQAAAAJ&hl/'>Anh Tran</a><sup></sup>
+                </p>
+                <div class="publication-venue">
+                   <span>CVPR, 2024</span>
+                   
+                </div>
+                <p class="publication-description">A multi-purpose dataset for extreme pose face, and high-quality for image generation tasks and for face recognition benchmarking.</p>
+                <!-- Publication Links. -->
+                <div class="publication-links buttons field has-addons">
+                   
+                   <a class="external-link button is-small is-ghost" href="https://vinairesearch.github.io/EFHQ/">
+                   <span class="icon"><i class="fas fa-globe-asia"></i></span>
+                   <span>Project Page</span>
+                   </a>
+                   
+                   
+                   <a class="external-link button is-small is-ghost" href="https://arxiv.org/abs/2312.17205">
+                   <span class="icon"><i class="ai ai-arxiv"></i></span>
+                   <span>arXiv</span>
+                   </a>
+                   
+                   
+                   <a class="external-link button is-small is-ghost" href="https://github.com/VinAIResearch/EFHQ">
+                   <span class="icon"><i class="fa fab fa-github"></i></span>
+                   <span>GitHub</span>
+                   </a>
+                   
+                </div>
+             </div>
+          </div>
+         </div>
+         
+      </main>
+      <div class="border-top-thin clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+    <p class="col-8 sm-width-full left py-2 mb-0">
+      2024. All rights Reserved. This website doesn't track
+      you. Thanks to
+      <a class="text-accent" href="https://giphy.com/">GIPHY</a> for GIFs!
+    </p>
+  </div>
+</div>
+
+   </body>
+</html>

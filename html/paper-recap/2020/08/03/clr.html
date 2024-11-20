@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Paper recap: Cyclical Learning Rates for Training Neural Networks
+  </title>
+  <meta
+    name="description"
+    content="Cyclical Learning Rates for Training Neural NetworksLesli N.Smith, 2017Research Topic  Category (General): Deep Learning  Category (Specific): Hyperparameter..."
+  />
+
+   
+  <link rel="stylesheet" href="/assets/style.css" />
+
+  <link
+    rel="canonical"
+    href="https://trung-dt.com/paper-recap/2020/08/03/clr.html"
+  />
+  <link rel="alternate" type="application/rss+xml" title="Trung Dao"
+  href="https://trung-dt.com/feed.xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="stylesheet" href="/assets/academicons.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+
+  <link rel="manifest" href="/site.webmanifest" />
+  <script async defer src="/assets/github-buttons.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: [
+        "MathMenu.js",
+        "MathZoom.js",
+        "AssistiveMML.js",
+        "a11y/accessibility-menu.js"
+      ],
+      jax: ["input/TeX", "output/CommonHTML"],
+      TeX: {
+        extensions: [
+          "AMSmath.js",
+          "AMSsymbols.js",
+          "noErrors.js",
+          "noUndefined.js",
+        ]
+      }
+    });
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      var TEX = MathJax.InputJax.TeX;
+      var COLS = function (W) {
+        var WW = [];
+        for (var i = 0, m = W.length; i < m; i++)
+          {WW[i] = TEX.Parse.prototype.Em(W[i])}
+        return WW.join(" ");
+      };
+      TEX.Definitions.Add({
+        environment: {
+          psmallmatrix: ['Array',null,'(',')','c',COLS([1/3]),".2em",'S',1],
+        }
+      });
+    });
+  </script>
+
+  <!-- Mathjax Support -->
+  <script
+    type="text/javascript"
+    async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"
+  ></script>
+
+
+ <script>
+  $(document).ready(function() {
+    console.log("hello"); // This will print "hello" to the console if the JavaScript is running
+
+    $('.publication').mouseover(function() {
+      console.log("Mouseover event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'block');
+        $(this).find('img').css('display', 'none');
+    });
+
+    $('.publication').mouseout(function() {
+      console.log("Mouseout event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'none');
+        $(this).find('img').css('display', 'block');
+    });
+  });
+</script> 
+  <script src="https://kit.fontawesome.com/a24e8ec4a3.js"></script>
+</head>
+
+
+  <body>
+    <header class="border-bottom-thick px-2 clearfix">
+  <div id="particles-js" class="particles"></div>
+<script src="https://trung-dt.com/assets/particles.js/particles.js"></script>
+<script src="https://trung-dt.com/assets/particles.js/dir/js/app.js"></script>
+
+  <div class="left sm-width-full py-1 mt-1 mt-lg-0">
+    <a class="align-middle link-primary text-accent" href="/">
+      Trung Dao
+    </a>
+  </div>
+  <div class="right sm-width-full">
+    <ul class="list-reset right py-1 header-text font-smoothing">
+   
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/blog/"
+      target="_blank"
+      >🐢 Blogs</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/cv/"
+      target="_blank"
+      >🎓 CV</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/gallery/"
+      target="_blank"
+      >💎 Film Photos</a
+    >
+  </li>
+         
+</ul>
+
+  </div>
+</header>
+
+
+    <div>
+      <article
+  class="container px-2 mx-auto mb4"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
+  <h1
+    id="post-title"
+    class="h0 col-9 sm-width-full py-4 mt-3 inline-block"
+    itemprop="name headline"
+  >
+    Paper recap: Cyclical Learning Rates for Training Neural Networks
+  </h1>
+  <div class="col-4 sm-width-full mt-1 border-top-thin">
+    <p class="mb-3 py-2 bold h4">
+      <time
+        datetime="2020-08-03T00:00:00+07:00"
+        itemprop="datePublished"
+        >Aug 3, 2020
+      </time>
+      |   6 mins 
+    </p>
+  </div>
+
+  <div class="prose" itemprop="articleBody">
+    <h2 id="cyclical-learning-rates-for-training-neural-networks">Cyclical Learning Rates for Training Neural Networks</h2>
+<p><a href="https://arxiv.org/abs/1506.01186">Lesli N.Smith, 2017</a></p>
+
+<h2 id="research-topic">Research Topic</h2>
+<ul>
+  <li>Category (General): Deep Learning</li>
+  <li>Category (Specific): Hyperparameters (Learning rate) Tuning</li>
+</ul>
+
+<h2 id="paper-summary">Paper summary</h2>
+<ul>
+  <li>Instead of monotonically decreasing the learning rate as in the traditional way, the author introduced a new method (called Cyclical Learning Rates) to control it, allowing the hyper-parameter to rise and fall systematically during training.</li>
+  <li>CLR improves classification accuracy without tuning and does not require any computations.</li>
+  <li>The author also showed a way to estimate the bounds for the learning rate to vary while training.</li>
+</ul>
+
+<h2 id="explain-like-im-5-eli5-">Explain Like I’m 5 (ELI5) 👶👶👶</h2>
+<p>Imagine you try to draw a picture, there are multiple ways to tackle this:</p>
+<ul>
+  <li>You jump straight-in, drawing up to ~80-90% of the picture. However, to refine it, you have to slow down to finish the touches, which very tiring, so you might have to slow down much more until you finish it or abandon it midway. (~ Learning rate schedule)</li>
+  <li>You start by drawing the layout, and then you calculate how much effort you should spend on each section. After you finish one, you reevaluate again and continue to draw until the picture is done. (~Adaptive learning rate)</li>
+  <li>You start simple, draw a tree today, draw some more trees tomorrow, and draw a sun and a mountain the following day. The gist is that you start slow and progress over time until you reach a particular intensity. Then you slow down again to avoid burnout until you’re at the initial state (finish a cycle), you will restart the cycle again until the picture is done. (~Cyclical Learning Rates)</li>
+</ul>
+
+<h2 id="issues-addressed-by-the-paper">Issues addressed by the paper</h2>
+<ul>
+  <li>To train a deep neural network to convergence requires one to experiment with a variety of LR.</li>
+  <li>There are already multiple solutions to this. These include learning rate scheduling (e.g., time-based decay, step decay, exponential decay), or adaptive learning rate (e.g., RMSProp, AdaGrad, AdaDelta, Adam), but there are still some drawbacks such as:
+    <ul>
+      <li>Learning rate scheduling: Monotonically decreased learning rate, which later proved that it would not help the model escape from the saddle point.</li>
+      <li>Adaptive learning rate: requires high computational cost.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="approachmethod">Approach/Method</h2>
+<ul>
+  <li>Observation: increasing the learning rate might have a short term negative effect and yet achieve a longer-term beneficial effect. (since increasing the learning rate allows more rapid traversal of saddle point plateaus)</li>
+  <li>Pick minimum (<code class="language-plaintext inlined highlighter-rouge">base_lr</code>) and maximum (<code class="language-plaintext inlined highlighter-rouge">max_lr</code>) boundaries, and the learning rate will cyclically vary between these bounds.</li>
+</ul>
+
+<p><img src="/assets/images/clr/window.png" alt="Window type" /></p>
+<ul>
+  <li>
+    <p>For the cyclical function, triangular(Bartlett) window, parabolic(Welch) window, and sinusoidal(Hanning) window produced equivalent results, which led to adopting a triangular window thanks to its simplicity.</p>
+  </li>
+  <li>
+    <p>Other variations:</p>
+    <ul>
+      <li><code class="language-plaintext inlined highlighter-rouge">triangular</code>: using triangular window</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">triangular_2</code>: same as triangular but after every cycle, <code class="language-plaintext inlined highlighter-rouge">max_lr</code> is halved</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">exp_range</code>: each boundary value declines by exponential factor of current iterations.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/clr/triangular.png" alt="Triangular window" /></p>
+
+<ul>
+  <li>How to find the bounds?
+    <ul>
+      <li>Using “LR range test”:
+        <ul>
+          <li>Run model for several epochs while letting the learning rate increase linearly between low and high LR values.</li>
+          <li>Notice these 2 points:
+            <ul>
+              <li>When accuracy starts to increase. -&gt; <code class="language-plaintext inlined highlighter-rouge">base_lr</code></li>
+              <li>When accuracy slows down, becomes ragged or falls down. -&gt; <code class="language-plaintext inlined highlighter-rouge">max_lr</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/clr/lr_range.png" alt="LR_finder" /></p>
+
+<h2 id="best-practices">Best practices</h2>
+<ul>
+  <li>Set <code class="language-plaintext inlined highlighter-rouge">stepsize</code> to 2-10 times of #iterations/epoch.</li>
+  <li>Best to stop training at the end of the cycle (LR at <code class="language-plaintext inlined highlighter-rouge">base_lr</code> and the accuracy peaks)
+    <ul>
+      <li>-&gt; Early stopping might not be good for CLR.</li>
+    </ul>
+  </li>
+  <li>Optimum learning rate is usually within a factor of two of the largest one that converges, and set <code class="language-plaintext inlined highlighter-rouge">base_lr</code> = \(\frac{1}{3}\) or \(\frac{1}{4}\)  of <code class="language-plaintext inlined highlighter-rouge">max_lr</code>.</li>
+</ul>
+
+<h2 id="results">Results</h2>
+<p><img src="/assets/images/clr/clr_result.png" alt="Result" /></p>
+<ul>
+  <li><code class="language-plaintext inlined highlighter-rouge">CLR</code> helps to model to converge much faster.</li>
+  <li><code class="language-plaintext inlined highlighter-rouge">Decay</code> (monotonically decreasing LR)’s result provides evidence that both increasing and decreasing LR are essential.</li>
+</ul>
+
+<h2 id="limitations">Limitations</h2>
+<p><img src="/assets/images/clr/clr_adaptive_result.png" alt="Result" /></p>
+<ul>
+  <li>When using with adaptive learning rate methods, the benefits from CLR are reduced.</li>
+</ul>
+
+<h2 id="confusing-aspects-of-the-paper">Confusing aspects of the paper</h2>
+<p><img src="/assets/images/clr/triangular_code.png" alt="Triangular code" /></p>
+<ul>
+  <li>The variables of the code weren’t explained clearly, so I redefine it here:
+    <ul>
+      <li><strong>1 epoch</strong>: converted to #iterations (= training_size / batch_size).</li>
+      <li><strong>1 cycle</strong>: LR goes from <code class="language-plaintext inlined highlighter-rouge">base_lr</code> -&gt; <code class="language-plaintext inlined highlighter-rouge">max_lr</code> -&gt; <code class="language-plaintext inlined highlighter-rouge">base_lr</code>.</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">epochCounter</code>: current #iterations (e.g: 1 epoch has 2000 iters, the model’s at epochs 1.5 =&gt; <code class="language-plaintext inlined highlighter-rouge">epochCounter</code> = 3000).</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">stepsize</code>: #iterations to reach 1/2 cycle.</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">opt.LR</code>: base lr</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">cycle</code>: which cycle the model’s currently in (1-2-…), always starts from 1 (first cycle).</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">x</code>: which part of the half-cycle, in range [0,1].</li>
+      <li><code class="language-plaintext inlined highlighter-rouge">lr</code>: the updated lr, with <code class="language-plaintext inlined highlighter-rouge">triangular</code> method.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<h3 id="the-authors-conclusions">The author’s conclusions</h3>
+<ul>
+  <li>All experiments show similar or better accuracy performance when using CLR versus using a fixed learning rate, even though the performance drops at some of the learning rate values within this range.</li>
+</ul>
+
+<h3 id="rating">Rating</h3>
+<p>Noice</p>
+
+<h3 id="my-conclusion">My Conclusion</h3>
+<ul>
+  <li>This paper is straightforward, well-explained, so I highly recommend new DL-practitioners to try reading it.</li>
+  <li>CLR is an impressive technique to control the learning rate. We should try this method when we started a new model or a new dataset, giving a lovely baseline for further optimization.</li>
+  <li>CLR is also widely used by kagglers.</li>
+</ul>
+
+<h2 id="paper-implementation">Paper implementation</h2>
+
+<h3 id="cyclical-learning-rates">Cyclical Learning Rates</h3>
+<ul>
+  <li><code class="language-plaintext inlined highlighter-rouge">triangular</code> implementation:
+<img src="/assets/images/clr/triangular_code_pt.png" alt="triangular_code_pt" /></li>
+  <li><code class="language-plaintext inlined highlighter-rouge">triangular_2</code> implementation:
+<img src="/assets/images/clr/triangular2_code_pt.png" alt="triangular2_code_pt" /></li>
+  <li><code class="language-plaintext inlined highlighter-rouge">exp_range</code> implementation:
+<img src="/assets/images/clr/exp_range_code_pt.png" alt="exp_range_code_pt" /></li>
+  <li>
+    <p>Plot:
+<img src="/assets/images/clr/all_res.png" alt="all_test" /></p>
+  </li>
+  <li>Explaination for how x is calculated:
+    <ul>
+      <li>\(raw\_x = \frac{current\_iteration}{step\_size}\): current cycle in term of half-cycles (floatting point)
+<img src="/assets/images/clr/raw_x.png" alt="raw_x" /></li>
+      <li>\(x’ = raw\_x - 2*cycle\): how many half-cycles left to complete this cycle
+<img src="/assets/images/clr/x_prime.png" alt="x_prime" /></li>
+      <li>\(x’ = x’ + 1\): Shift so that the function 0-centered on the y-axis, so that when we take absolute, we can achieve cycles.
+<img src="/assets/images/clr/x_shifted.png" alt="x_prime_shift" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="learning-rate-finder">Learning Rate Finder</h3>
+<ul>
+  <li>An implementation of LRFinder using CLR using Callback (highly influenced by fastai):
+<img src="/assets/images/clr/lr_finder.png" alt="lr_finder" /></li>
+</ul>
+
+<h2 id="cited-references-and-used-images-from">Cited references and used images from:</h2>
+<ul>
+  <li>https://www.jeremyjordan.me/nn-learning-rate/</li>
+  <li>https://github.com/bckenstler/CLR/</li>
+</ul>
+
+<h2 id="papers-needs-to-conquer-next-">Papers needs to conquer next 👏👏👏</h2>
+<ul>
+  <li><a href="https://arxiv.org/abs/1608.03983">SGDR</a></li>
+  <li><a href="https://arxiv.org/abs/1803.09820">Fit One Cycle</a></li>
+</ul>
+
+  </div>
+</article>
+
+<div class="container mx-auto px-2 py-2 clearfix">
+  <!-- Use if you want to show previous and next for posts within a category. -->
+
+
+
+ 
+<div class="col-4 sm-width-full left mt-3">
+  <a
+    class="no-underline border-top-thin py-1 block"
+    href="https://trung-dt.com/paper-recap/2020/08/10/1cycle.html"
+  >
+    <span class="h5 bold text-accent">Next</span>
+    <p class="bold h3 link-primary mb-1">Paper recap: A disciplined approach to neural network hyper-parameters: Part 1</p>
+    <p>## A disciplined approach to neural network hyper-parameters: Part 1 [Lesli N.Smith, 2018](http://arxiv.org/abs/1803.09820) ## Research Topic - Category (General): Deep...</p>
+  </a>
+</div>
+
+
+</div>
+
+
+
+
+    </div>
+
+    <div class="border-top-thin clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+    <p class="col-8 sm-width-full left py-2 mb-0">
+      2024. All rights Reserved. This website doesn't track
+      you. Thanks to
+      <a class="text-accent" href="https://giphy.com/">GIPHY</a> for GIFs!
+    </p>
+  </div>
+</div>
+
+  </body>
+</html>

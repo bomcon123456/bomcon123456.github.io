@@ -6,16 +6,16 @@
   arxiv: 2411.04168
   github: VinAIResearch/DiMSUM
   image: dimsum_before.png
-  image_mouseover: dimsum_after.gif
+  image_mouseover: dimsum_after.mp4
   authors:
     - author_id: "haopt"
       sign: "*"
     - author_id: "quandm"
       sign: "*"
     - author_id: "trungdt"
-      sign: "*"
+      sign: ""
     - author_id: "hoangpv"
-      sign: "*"
+      sign: ""
     - author_id: "metaxas"
       sign: ""
     - author_id: "anhtt"

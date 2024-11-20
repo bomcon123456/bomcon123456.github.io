@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Paper recap: Bag of Tricks for Image Classification with Convolutional Neural Networks
+  </title>
+  <meta
+    name="description"
+    content="Bag of Tricks for Image Classification with Convolutional Neural NetworksHe, Tong Zhang, Zhi Zhang, Hang Zhang, Zhongyue Xie, Junyuan Li, Mu, 2019Research To..."
+  />
+
+   
+  <link rel="stylesheet" href="/assets/style.css" />
+
+  <link
+    rel="canonical"
+    href="https://trung-dt.com/paper-recap/2020/09/07/bagoftricks.html"
+  />
+  <link rel="alternate" type="application/rss+xml" title="Trung Dao"
+  href="https://trung-dt.com/feed.xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="stylesheet" href="/assets/academicons.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+
+  <link rel="manifest" href="/site.webmanifest" />
+  <script async defer src="/assets/github-buttons.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: [
+        "MathMenu.js",
+        "MathZoom.js",
+        "AssistiveMML.js",
+        "a11y/accessibility-menu.js"
+      ],
+      jax: ["input/TeX", "output/CommonHTML"],
+      TeX: {
+        extensions: [
+          "AMSmath.js",
+          "AMSsymbols.js",
+          "noErrors.js",
+          "noUndefined.js",
+        ]
+      }
+    });
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      var TEX = MathJax.InputJax.TeX;
+      var COLS = function (W) {
+        var WW = [];
+        for (var i = 0, m = W.length; i < m; i++)
+          {WW[i] = TEX.Parse.prototype.Em(W[i])}
+        return WW.join(" ");
+      };
+      TEX.Definitions.Add({
+        environment: {
+          psmallmatrix: ['Array',null,'(',')','c',COLS([1/3]),".2em",'S',1],
+        }
+      });
+    });
+  </script>
+
+  <!-- Mathjax Support -->
+  <script
+    type="text/javascript"
+    async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"
+  ></script>
+
+
+ <script>
+  $(document).ready(function() {
+    console.log("hello"); // This will print "hello" to the console if the JavaScript is running
+
+    $('.publication').mouseover(function() {
+      console.log("Mouseover event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'block');
+        $(this).find('img').css('display', 'none');
+    });
+
+    $('.publication').mouseout(function() {
+      console.log("Mouseout event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'none');
+        $(this).find('img').css('display', 'block');
+    });
+  });
+</script> 
+  <script src="https://kit.fontawesome.com/a24e8ec4a3.js"></script>
+</head>
+
+
+  <body>
+    <header class="border-bottom-thick px-2 clearfix">
+  <div id="particles-js" class="particles"></div>
+<script src="https://trung-dt.com/assets/particles.js/particles.js"></script>
+<script src="https://trung-dt.com/assets/particles.js/dir/js/app.js"></script>
+
+  <div class="left sm-width-full py-1 mt-1 mt-lg-0">
+    <a class="align-middle link-primary text-accent" href="/">
+      Trung Dao
+    </a>
+  </div>
+  <div class="right sm-width-full">
+    <ul class="list-reset right py-1 header-text font-smoothing">
+   
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/blog/"
+      target="_blank"
+      >🐢 Blogs</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/cv/"
+      target="_blank"
+      >🎓 CV</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/gallery/"
+      target="_blank"
+      >💎 Film Photos</a
+    >
+  </li>
+         
+</ul>
+
+  </div>
+</header>
+
+
+    <div>
+      <article
+  class="container px-2 mx-auto mb4"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
+  <h1
+    id="post-title"
+    class="h0 col-9 sm-width-full py-4 mt-3 inline-block"
+    itemprop="name headline"
+  >
+    Paper recap: Bag of Tricks for Image Classification with Convolutional Neural Networks
+  </h1>
+  <div class="col-4 sm-width-full mt-1 border-top-thin">
+    <p class="mb-3 py-2 bold h4">
+      <time
+        datetime="2020-09-07T00:00:00+07:00"
+        itemprop="datePublished"
+        >Sep 7, 2020
+      </time>
+      |   5 mins 
+    </p>
+  </div>
+
+  <div class="prose" itemprop="articleBody">
+    <h2 id="bag-of-tricks-for-image-classification-with-convolutional-neural-networks">Bag of Tricks for Image Classification with Convolutional Neural Networks</h2>
+<p><a href="https://arxiv.org/abs/1812.01187">He, Tong Zhang, Zhi Zhang, Hang Zhang, Zhongyue Xie, Junyuan Li, Mu, 2019</a></p>
+
+<h2 id="research-topic">Research Topic</h2>
+<ul>
+  <li>Category (General): Deep Learning</li>
+  <li>Category (Specific): Computer Vision</li>
+</ul>
+
+<h2 id="paper-summary">Paper summary</h2>
+<ul>
+  <li>Synthesize multiple effective methods that are briefly mentioned in litterature, in order to evaluate their impact on the final model accuracy through ablation study.</li>
+</ul>
+
+<h2 id="issues-addressed-by-the-paper">Issues addressed by the paper</h2>
+<ul>
+  <li>Find a combination of training procedure and model architecture refinements that improve model accuracy but barely change computational complexity.</li>
+  <li>These “tricks” usually are minor ones (such as changing the stride of a convolutional layer), but create a big impact.</li>
+  <li>These methods lead to significant accuracy improvement and combining them together can further boost the model accuracy. Transfer learning’s performance of these “boosted” model would be much better too.</li>
+</ul>
+
+<h2 id="approachmethod">Approach/Method</h2>
+
+<h3 id="training-baseline">Training baseline</h3>
+<ul>
+  <li>Use the same training transformation (random sampling, random crop, random flip, hue/saturation/brightness, PCA noise, normalize).</li>
+  <li>Only resize in validation set.</li>
+  <li>Xavier initialization for weights of both convolutional and fully connected.</li>
+  <li>Use NAG (Nesterov), 120 epochs, 8 GPUs, batch-size = 256.</li>
+  <li>LR initialized to 0.1 and divided by 10 at the 30th, 60th, and 90th epochs.</li>
+</ul>
+
+<p align="center">
+  <img src="/assets/images/bot/baseline.png" style="width: 50%;" alt="baseline" />
+</p>
+
+<h3 id="efficient-training">Efficient Training</h3>
+<ol>
+  <li>Larger training batch-size:
+    <ul>
+      <li>Since we’re using mini-batch SGD, for the same number of epochs, training with a large batch size results in a model with degraded validation accuracy compared to the ones trained with smaller batch sizes.</li>
+      <li>Some heuristics the help scale the batch size up like:
+        <ul>
+          <li><strong>Linear scaling learning rate</strong>: a large batch size reduces the noise in the gradient, so we may increase the learning rate to make a larger progress along the op- posite of the gradient direction.</li>
+          <li><strong>Learning rate warmup</strong>: Using a too large learning rate may result in numerical instability, so we gradually increase it.</li>
+          <li><strong>Zero \(\gamma\)</strong>: we initialize \(\gamma = 0\) for all BN layers that sit at the end of a residual block. Therefore, all residual blocks just return their inputs, mimics network that has less number of layers and is easier to train at the initial stage.</li>
+          <li><strong>No bias decay</strong>: Only apply to the regularization to weights to avoid overfitting.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Low-precision training:
+    <ul>
+      <li>Use FP16 to train since new hardware may have enhanced arithmetic logic unit for lower precision data types.</li>
+    </ul>
+  </li>
+</ol>
+
+<p align="center">
+  <img src="/assets/images/bot/efficient_training.png" style="width: 85%;" alt="efficient_training" />
+</p>
+
+<h3 id="model-tweaks">Model Tweaks</h3>
+<ul>
+  <li>A model tweak is a minor adjustment to the network architecture (changing the stride of convlution layer).</li>
+  <li>Such a tweak barely changes the computational complexity but might have a non-negligible effect on the model accuracy.</li>
+  <li>Take a closer look at Resnet architecture:
+    <ul>
+      <li>Resnet network consists of an input stem (reduces the input W/H by 4 times and increases its channel size to 64), four subsequent stages and a final output layer.</li>
+      <li>Resnet has a basic block called Bottleneck Block (downsampling block). There are 2 paths in the block:
+        <ul>
+          <li>Path A: has three convolutions, whose kernel sizes are 1×1 (stride 2 - halve the input size), 3×3 and 1×1 (output channels x4 the previous 2), respectively.</li>
+          <li>Path B: uses a 1×1 convolution (stride of 2) to create the same output shape as path A, so we can sum outputs of both paths to obtain the output of the downsampling block.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p align="center">
+  <img src="/assets/images/bot/resnet.png" style="width: 50%;" alt="resnet" />
+</p>
+
+<ul>
+  <li>There are 3 tweaks mentioned is this paper:</li>
+</ul>
+<p align="center">
+  <img src="/assets/images/bot/resnet_tweak.png" style="width: 50%;" alt="resnet_tweak" />
+</p>
+<ul>
+  <li><strong>Resnet-B</strong>: modifies downsampling block
+    <ul>
+      <li>Observation: convolution in path A (original) ignores \(\frac{3}{4}\) of the input feature map because it uses a kernel size 1×1 with a stride of 2.</li>
+      <li>Tweak: Change stride of the first two conv, so no information is ignored.</li>
+    </ul>
+  </li>
+  <li><strong>Resnet-C</strong>: modifies input stem
+    <ul>
+      <li>Observation: the computational cost of a convolution is quadratic to the kernel width or height (A 7 × 7 convolution is 5.4 times more expensive than a 3 × 3 convolution).</li>
+      <li>Tweak: replacing the 7×7 convolution with 3 conservative 3 × 3 convolutions, with the first and second convolutions have their output channel of 32 and a stride of 2, while the last convolution uses a 64 output channel.</li>
+    </ul>
+  </li>
+  <li><strong>Resnet-D</strong>: modifies downsampling block
+    <ul>
+      <li>Observation: Inspired by Resnet-B, 1×1 convolution in the path B also ignores \(\frac{3}{4}\) of input feature maps.</li>
+      <li>Tweak: Change stride to 1 and add a 2×2 average pooling layer with a stride of 2 before the convolution, since it works well in practice and impacts the computational cost little.</li>
+    </ul>
+  </li>
+</ul>
+
+<p align="center">
+  <img src="/assets/images/bot/resnet_tweak_res.png" style="width: 50%;" alt="resnet_tweak_res" />
+</p>
+
+<h3 id="training-refinements">Training Refinements</h3>
+<ul>
+  <li><strong>Cosine Learning Rate Decay</strong>:
+    <ul>
+      <li>Method: Same as my previous post.</li>
+      <li>Result: Compared to the step decay, the cosine decay starts to decay the learning since the beginning but remains large until step decay reduces the learning rate by 10x, which potentially improves the training progress.</li>
+    </ul>
+  </li>
+</ul>
+<p align="center">
+  <img src="/assets/images/bot/cosanneal.png" style="width: 50%;" alt="cosanneal" />
+</p>
+
+<ul>
+  <li><strong>Label Smoothing</strong>:
+    <ul>
+      <li>Method: Same as my previous post.</li>
+      <li>Result: Compared to the softmax, it encourages a finite output from the fully-connected layer and can generalize better.</li>
+    </ul>
+  </li>
+  <li><strong>Knowledge Distillation</strong>: skipped.</li>
+  <li><strong>Mixup</strong>: Same as my previous post.</li>
+</ul>
+
+<p align="center">
+  <img src="/assets/images/bot/refinements.png" style="width: 50%;" alt="refinements" />
+</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<h3 id="rating">Rating</h3>
+<p><img src="https://media.giphy.com/media/xl3Bs2qfS1jDOSHA8V/giphy.gif" alt="rating" /></p>
+
+<h2 id="papers-needs-to-conquer-next-">Papers needs to conquer next 👏👏👏</h2>
+<ul>
+  <li>Focal Loss</li>
+</ul>
+
+  </div>
+</article>
+
+<div class="container mx-auto px-2 py-2 clearfix">
+  <!-- Use if you want to show previous and next for posts within a category. -->
+
+
+
+
+<div class="col-4 sm-width-full left mr-lg-4 mt-3">
+  <a
+    class="no-underline border-top-thin py-1 block"
+    href="https://trung-dt.com/paper-recap/2020/08/31/cutmix.html"
+  >
+    <span class="h5 bold text-accent">Previous</span>
+    <p class="bold h3 link-primary mb-1">Paper recap: CutMix</p>
+    <p>CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features Yun, Sangdoo Han, Dongyoon Chun, Sanghyuk Oh, Seong Joon Choe,...</p>
+  </a>
+</div>
+ 
+<div class="col-4 sm-width-full left mt-3">
+  <a
+    class="no-underline border-top-thin py-1 block"
+    href="https://trung-dt.com/paper-recap/2020/10/12/focalloss.html"
+  >
+    <span class="h5 bold text-accent">Next</span>
+    <p class="bold h3 link-primary mb-1">Paper recap: Focal Loss for Dense Object Detection</p>
+    <p>## Focal Loss for Dense Object Detection [Lin et al, 2020](https://arxiv.org/abs/1708.02002) ## Research Topic - Category (General): Deep Learning -...</p>
+  </a>
+</div>
+
+
+</div>
+
+
+
+
+    </div>
+
+    <div class="border-top-thin clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+    <p class="col-8 sm-width-full left py-2 mb-0">
+      2024. All rights Reserved. This website doesn't track
+      you. Thanks to
+      <a class="text-accent" href="https://giphy.com/">GIPHY</a> for GIFs!
+    </p>
+  </div>
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Paper recap: SGDR, Super-convergence
+  </title>
+  <meta
+    name="description"
+    content="SGDR: Stochastic Gradient Descent with Warm RestartsIlya Loshchilov, Frank Hutter, 2016Super-Convergence: Very Fast Training of Neural Networks Using Large L..."
+  />
+
+   
+  <link rel="stylesheet" href="/assets/style.css" />
+
+  <link
+    rel="canonical"
+    href="https://trung-dt.com/paper-recap/2020/08/17/sgdr.html"
+  />
+  <link rel="alternate" type="application/rss+xml" title="Trung Dao"
+  href="https://trung-dt.com/feed.xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="stylesheet" href="/assets/academicons.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+
+  <link rel="manifest" href="/site.webmanifest" />
+  <script async defer src="/assets/github-buttons.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: [
+        "MathMenu.js",
+        "MathZoom.js",
+        "AssistiveMML.js",
+        "a11y/accessibility-menu.js"
+      ],
+      jax: ["input/TeX", "output/CommonHTML"],
+      TeX: {
+        extensions: [
+          "AMSmath.js",
+          "AMSsymbols.js",
+          "noErrors.js",
+          "noUndefined.js",
+        ]
+      }
+    });
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      var TEX = MathJax.InputJax.TeX;
+      var COLS = function (W) {
+        var WW = [];
+        for (var i = 0, m = W.length; i < m; i++)
+          {WW[i] = TEX.Parse.prototype.Em(W[i])}
+        return WW.join(" ");
+      };
+      TEX.Definitions.Add({
+        environment: {
+          psmallmatrix: ['Array',null,'(',')','c',COLS([1/3]),".2em",'S',1],
+        }
+      });
+    });
+  </script>
+
+  <!-- Mathjax Support -->
+  <script
+    type="text/javascript"
+    async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"
+  ></script>
+
+
+ <script>
+  $(document).ready(function() {
+    console.log("hello"); // This will print "hello" to the console if the JavaScript is running
+
+    $('.publication').mouseover(function() {
+      console.log("Mouseover event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'block');
+        $(this).find('img').css('display', 'none');
+    });
+
+    $('.publication').mouseout(function() {
+      console.log("Mouseout event triggered");
+      const video = $(this).find('video')[0]; // Get the DOM element
+      console.log("Video element found:", video);
+        $(video).css('display', 'none');
+        $(this).find('img').css('display', 'block');
+    });
+  });
+</script> 
+  <script src="https://kit.fontawesome.com/a24e8ec4a3.js"></script>
+</head>
+
+
+  <body>
+    <header class="border-bottom-thick px-2 clearfix">
+  <div id="particles-js" class="particles"></div>
+<script src="https://trung-dt.com/assets/particles.js/particles.js"></script>
+<script src="https://trung-dt.com/assets/particles.js/dir/js/app.js"></script>
+
+  <div class="left sm-width-full py-1 mt-1 mt-lg-0">
+    <a class="align-middle link-primary text-accent" href="/">
+      Trung Dao
+    </a>
+  </div>
+  <div class="right sm-width-full">
+    <ul class="list-reset right py-1 header-text font-smoothing">
+   
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/blog/"
+      target="_blank"
+      >🐢 Blogs</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/cv/"
+      target="_blank"
+      >🎓 CV</a
+    >
+  </li>
+    
+  <li class="inline-block">
+    <a
+      class="align-middle link-primary header-link mr-2"
+      href="/gallery/"
+      target="_blank"
+      >💎 Film Photos</a
+    >
+  </li>
+         
+</ul>
+
+  </div>
+</header>
+
+
+    <div>
+      <article
+  class="container px-2 mx-auto mb4"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
+  <h1
+    id="post-title"
+    class="h0 col-9 sm-width-full py-4 mt-3 inline-block"
+    itemprop="name headline"
+  >
+    Paper recap: SGDR, Super-convergence
+  </h1>
+  <div class="col-4 sm-width-full mt-1 border-top-thin">
+    <p class="mb-3 py-2 bold h4">
+      <time
+        datetime="2020-08-17T00:00:00+07:00"
+        itemprop="datePublished"
+        >Aug 17, 2020
+      </time>
+      |   6 mins 
+    </p>
+  </div>
+
+  <div class="prose" itemprop="articleBody">
+    <h2 id="sgdr-stochastic-gradient-descent-with-warm-restarts">SGDR: Stochastic Gradient Descent with Warm Restarts</h2>
+<p><a href="https://arxiv.org/abs/1506.01186">Ilya Loshchilov, Frank Hutter, 2016</a></p>
+
+<h2 id="super-convergence-very-fast-training-of-neural-networks-using-large-learning-rates">Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates</h2>
+<p><a href="https://arxiv.org/abs/1708.07120">Leslie N. Smith, Nicholay Topin, 2017</a></p>
+
+<h2 id="research-topic">Research Topic</h2>
+<ul>
+  <li>Category (General): Deep Learning</li>
+  <li>Category (Specific): Hyper Tuning, Optimization</li>
+</ul>
+
+<h2 id="paper-summary">Paper summary</h2>
+
+<h3 id="sgdr">SGDR</h3>
+<ul>
+  <li>Partial warm restarts improve rate of convergence, often used in gradient-free optimization.</li>
+  <li>Propose a warm restart technique for stochastic gradient descent.</li>
+  <li>Study its performance on CIFAR-10/100</li>
+  <li>Show that this technique improve its anytime performance when training deep neural network:
+    <ul>
+      <li>SGD with warm restarts requires 2× to 4× fewer epochs than the currently-used learning rate schedule schemes to achieve comparable or even better results</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="super-convergence">Super-convergence</h3>
+<ul>
+  <li>Introduce “Super-convergence” term: where neural networks can be train and converge much faster than standard training methods.</li>
+  <li>Propoce a way to achieve super-convergence: one-cycle policy + large learning rate.</li>
+  <li>Use Hessian Free optimization method to produce an estimate of the optimal learning rate.</li>
+  <li>Study its performance on CIFAR-10/100, MNIST, Imagenet with various model.</li>
+  <li>Show that this phenomenon can also happen when the amount of labeled training data is limited but still boost the model performance.</li>
+  <li>Mostly all of these are mentioned in the previous recap, so it will not be discussed more in the sections below.</li>
+</ul>
+
+<h2 id="explain-like-im-5-eli5-">Explain Like I’m 5 (ELI5) 👶👶👶</h2>
+
+<h3 id="sgdr-1">SGDR</h3>
+<ul>
+  <li>Just like a normal person works everyday. You start the day with maximum effort, but then time goes by you feel tired and the productivity reduces. You go home, rest. The next day, you’re recharged and start the cycle once again.</li>
+</ul>
+
+<h3 id="super-convergence-1">Super-convergence</h3>
+<ul>
+  <li>As a result of CLR, super-convergence is born.</li>
+</ul>
+
+<h2 id="issues-addressed-by-the-paper">Issues addressed by the paper</h2>
+
+<h3 id="sgdr-2">SGDR</h3>
+<ul>
+  <li>Despite of the existance of advanced optimization methods like Adam, AdaDelta, SOTA result on CIFAR-10/100, ImageNet still based on SGD with momentum, associated with Resnet model.</li>
+  <li>Current way to get out of the plateau while using SGD is LR scheduler and L2 regularization.</li>
+  <li>They want to break through and produce a new approach to SGD.</li>
+</ul>
+
+<h3 id="super-convergence-2">Super-convergence</h3>
+<ul>
+  <li>They found a way to train DNN faster and achieve better performance.</li>
+  <li>Large LR regularizes training, so other regularization method should be reduced to maintain optimal balance of optimization</li>
+  <li>Hessian-free optimization method estimates optimal LR, demonstrating that large LR find wide, flat minima.</li>
+</ul>
+
+<h2 id="approachmethod">Approach/Method</h2>
+
+<h3 id="sgdr-3">SGDR</h3>
+<ul>
+  <li>SGDR simulates a new warm-started run/restart of SGD after \(T_{i}\) epochs are performed.</li>
+</ul>
+
+<p align="center">
+<img src="/assets/images/sgdr/cos_annealing.png" style="width: 50%;" alt="cosann" />
+</p>
+<ul>
+  <li>Learning rate is calculated by cos annealing function.</li>
+</ul>
+
+\[\eta_{t}=\eta_{\min }^{i}+\frac{1}{2}\left(\eta_{\max }^{i}-\eta_{\min }^{i}\right)\left(1+\cos \left(\frac{T_{\text {cur}}}{T_{i}} \pi\right)\right)\]
+
+<ul>
+  <li>\(\eta\): learning rate.</li>
+  <li>\(T_{cur}\): how many epochs passed since the restart.</li>
+  <li>
+    <p>\(T_{i}\): how mane epochs for a restart, you can leave it constant or increase over-time.</p>
+  </li>
+  <li>How the learning rate looks after training:</li>
+</ul>
+<p align="center">
+<img src="/assets/images/sgdr/sgdr.png" style="width: 50%;" alt="sgdr" />
+</p>
+
+<h2 id="best-practice">Best practice</h2>
+
+<h3 id="sgdr-4">SGDR</h3>
+<ul>
+  <li>Start with small \(T_{i}\), then increase it by factor of \(T_{mult}\) at every start.</li>
+</ul>
+<p align="center">
+<img src="/assets/images/sgdr/sgdrs.png" style="width: 100%;" alt="sgdrs" />
+</p>
+<ul>
+  <li>Decreate max_lr and min_lr at every new start may increase performance.</li>
+  <li>Stop training when current learning rate is equal to min_lr.</li>
+  <li>SGDR allows to train larger network.</li>
+</ul>
+
+<h2 id="results">Results</h2>
+<p align="center">
+<img src="/assets/images/sgdr/sgdr_res.png" style="width: 100%;" alt="sgdres" />
+</p>
+<ul>
+  <li>SGDR technique helps the author to surpass the SOTA at the time with much faster computational time.</li>
+</ul>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<h3 id="the-authors-conclusions">The author’s conclusions</h3>
+<ul>
+  <li>Our SGDR simulates warm restarts by scheduling the learning rate to achieve competitive results on CIFAR-10 and CIFAR-100 roughly two to four times faster, achieved new state- of-the-art results with SGDR.</li>
+  <li>SGDR might also reduce the problem of learning rate selection because the annealing and restarts of SGDR scan / consider a range of learning rate values.</li>
+</ul>
+
+<h3 id="rating">Rating</h3>
+<p><img src="https://media.giphy.com/media/z8rEcJ6I0hiUM/giphy.gif" alt="rating" /></p>
+
+<h3 id="my-conclusion">My Conclusion</h3>
+<ul>
+  <li>Another technique can be considered when training in new project, should quick test overall before stick to one and go deeper.</li>
+</ul>
+
+<h2 id="paper-implementation">Paper implementation</h2>
+
+<h3 id="cos-annealing">Cos Annealing</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sched_cos</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">T_cur</span><span class="p">,</span> <span class="n">T_i</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">T_cur</span> <span class="o">/</span> <span class="n">T_i</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span></code></pre></figure>
+
+<h3 id="sgdr-5">SGDR</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">last_epoch</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">epoch</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">epoch</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">epoch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">last_epoch</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_i</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_i</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">T_i</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_i</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_mult</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_mult</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">=</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">((</span><span class="n">epoch</span> <span class="o">/</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_0</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">T_mult</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_mult</span><span class="p">))</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">=</span> <span class="n">epoch</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_0</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">T_mult</span> <span class="o">**</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">T_mult</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">T_i</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_0</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_mult</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">T_i</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_0</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span> <span class="o">=</span> <span class="n">epoch</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">last_epoch</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">sched_cos</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">base_lr</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">max_lr</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_cur</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">T_i</span><span class="p">)</span></code></pre></figure>
+
+<h2 id="cited-references-and-used-images-from">Cited references and used images from:</h2>
+<ul>
+  <li>https://towardsdatascience.com/https-medium-com-reina-wang-tw-stochastic-gradient-descent-with-restarts-5f511975163</li>
+  <li>https://arxiv.org/abs/1608.03983</li>
+  <li>Pytorch library</li>
+</ul>
+
+<h2 id="papers-needs-to-conquer-next-">Papers needs to conquer next 👏👏👏</h2>
+<ul>
+  <li><a href="https://arxiv.org/abs/1710.09412">Mixup</a></li>
+  <li><a href="https://arxiv.org/abs/1905.04899">Cutmix</a></li>
+</ul>
+
+  </div>
+</article>
+
+<div class="container mx-auto px-2 py-2 clearfix">
+  <!-- Use if you want to show previous and next for posts within a category. -->
+
+
+
+
+<div class="col-4 sm-width-full left mr-lg-4 mt-3">
+  <a
+    class="no-underline border-top-thin py-1 block"
+    href="https://trung-dt.com/paper-recap/2020/08/10/1cycle.html"
+  >
+    <span class="h5 bold text-accent">Previous</span>
+    <p class="bold h3 link-primary mb-1">Paper recap: A disciplined approach to neural network hyper-parameters: Part 1</p>
+    <p>A disciplined approach to neural network hyper-parameters: Part 1 Lesli N.Smith, 2018 Research Topic Category (General): Deep Learning. Category (Specific):...</p>
+  </a>
+</div>
+ 
+<div class="col-4 sm-width-full left mt-3">
+  <a
+    class="no-underline border-top-thin py-1 block"
+    href="https://trung-dt.com/paper-recap/2020/08/24/mixup.html"
+  >
+    <span class="h5 bold text-accent">Next</span>
+    <p class="bold h3 link-primary mb-1">Paper recap: MixUp: Beyond empirical risk minimization</p>
+    <p>## MixUp: Beyond empirical risk minimization [Zhang, Hongyi Cisse, Moustapha Dauphin, Yann N.Lopez-Paz, David, 2018](https://arxiv.org/abs/1710.09412) ## Research Topic - Category...</p>
+  </a>
+</div>
+
+
+</div>
+
+
+
+
+    </div>
+
+    <div class="border-top-thin clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+    <p class="col-8 sm-width-full left py-2 mb-0">
+      2024. All rights Reserved. This website doesn't track
+      you. Thanks to
+      <a class="text-accent" href="https://giphy.com/">GIPHY</a> for GIFs!
+    </p>
+  </div>
+</div>
+
+  </body>
+</html>
