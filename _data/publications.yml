@@ -47,7 +47,7 @@
 - id: efhq
   title: "EFHQ: Multi-purpose ExtremePose-Face-HQ dataset."
   venue: CVPR, 2024
-  description: "A multi-purpose dataset for extreme pose face, and high-quality for image generation tasks and for face recognition benchmarking."
+  description: "A high-quality dataset centered on extreme pose faces, supporting face synthesis, reenactment, recognition benchmarking, and more."
   project_page: "https://vinairesearch.github.io/EFHQ/"
   github: VinAIResearch/EFHQ
   arxiv: 2312.17205

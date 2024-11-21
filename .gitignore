@@ -5,3 +5,4 @@ vendor/
 .sass-cache/
 public_html/
 .DS_Store
+html

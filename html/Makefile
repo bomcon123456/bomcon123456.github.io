@@ -6,3 +6,6 @@ serve:
 
 clean:
 	bundle exec jekyll clean
+
+push:
+	rsync -aP html/ root@192.168.50.242:/var/www/
