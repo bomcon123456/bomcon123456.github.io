@@ -8,4 +8,4 @@ clean:
 	bundle exec jekyll clean
 
 push:
-	rsync -P html root@192.168.50.242:/var/www
+	rsync -aP html root@192.168.50.242:/var/www/
