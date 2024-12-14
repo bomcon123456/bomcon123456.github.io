@@ -1,3 +1,23 @@
+- id: selfflow
+  title: "Self-Corrected Flow Distillation for Consistent One-Step and Few-Step Image Generation"
+  venue: AAAI, 2025
+  description: "A comprehensive distillation framework for latent flow matching models that excels in generating high-quality and consistent images in both one-step and few-step sampling"
+  project_page: 
+  arxiv: 
+  github: 
+  image: selfflow_before.jpg
+  image_mouseover: selfflow_after.mp4
+  authors:
+    - author_id: "quandm"
+      sign: "*"
+    - author_id: "haopt"
+      sign: "*"
+    - author_id: "trungdt"
+      sign: ""
+    - author_id: "metaxas"
+      sign: ""
+    - author_id: "anhtt"
+      sign: ""
 - id: dimsum
   title: "DiMSUM : Diffusion Mamba - A Scalable and Unified Spatial-Frequency Method for Image Generation"
   venue: NeurIPS, 2024
