@@ -238,3 +238,32 @@ a:hover {
     padding: 5px;
   }
 }
+
+a[data-last-updated] {
+  position: relative;
+}
+
+a[data-last-updated]::after {
+  content: attr(data-last-updated);
+  position: absolute;
+  bottom: -2.5em; /* Adjust the distance from the link */
+  left: 85%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 0.5em;
+  border-radius: 0.3em;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 1000;
+  max-width: 200px; /* Limit the width of the tooltip */
+  text-align: center;
+  font-size: 0.8em; /* Adjust the font size */
+}
+
+a[data-last-updated]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
