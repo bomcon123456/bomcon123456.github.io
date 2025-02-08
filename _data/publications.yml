@@ -2,9 +2,9 @@
   title: "Self-Corrected Flow Distillation for Consistent One-Step and Few-Step Image Generation"
   venue: AAAI, 2025
   description: "A comprehensive distillation framework for latent flow matching models that excels in generating high-quality and consistent images in both one-step and few-step sampling"
-  project_page: 
-  arxiv: 
-  github: 
+  project_page:
+  arxiv: 2412.16906
+  github:
   image: selfflow_before.jpg
   image_mouseover: selfflow_after.mp4
   authors:
