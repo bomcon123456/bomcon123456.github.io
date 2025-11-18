@@ -6,7 +6,7 @@
   arxiv: 2510.21250v1
   github:
   image: ism.png
-  image_mouseover: ism.png
+  image_mouseover: ism.mp4
   authors:
     - author_id: "anhnguyen"
       sign: "*"
@@ -30,7 +30,7 @@
   arxiv: 2412.02687
   github:
   image: snoopi.jpg
-  image_mouseover: snoopi.jpg
+  image_mouseover: snoopi.mp4
   authors:
     - author_id: "vietnguyen"
       sign: "*"

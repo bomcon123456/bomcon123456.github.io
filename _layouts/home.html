@@ -61,14 +61,10 @@
             <div class="publication-header">
               <div class="publication-image">
                 <img src="./images/{{ publication.image }}" alt="{{ publication.title }}">
-                {% if publication.image_mouseover and publication.image_mouseover.lower().endswith(('.mp4', '.webm', '.ogg', '.mov')) %}
                 <video class="publication-video" autoplay preload playsinline loop muted>
                   <source src="./images/{{ publication.image_mouseover }}" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-                {% elif publication.image_mouseover %}
-                <img class="publication-image" src="./images/{{ publication.image_mouseover }}" alt="{{ publication.title }} mouseover">
-                {% endif %}
               </div>
              <div class="publication-details">
                 <h3 class="publication-title">{{ publication.title }}</h3>
