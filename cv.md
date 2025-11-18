@@ -1,7 +1,7 @@
 ---
 layout: redirect
 title: 🎓 CV
-last_updated: "12/14/2024"
+last_updated: "11/18/2025"
 permalink: /cv/
 destination: /cv.pdf
 ---
