@@ -45,3 +45,19 @@ metaxas:
   first_name: Dimitris
   last_name: Metaxas
   website: https://people.cs.rutgers.edu/~dnm/
+vietnguyen:
+  first_name: Viet
+  last_name: Nguyen
+  website: https://viettmab.github.io/
+anhnguyen:
+  first_name: Anh
+  last_name: Nguyen
+  website: https://aengusng8.github.io/
+toantran:
+  first_name: Toan
+  last_name: Tran
+  website: https://scholar.google.com/citations?user=PnwSuNMAAAAJ&hl=en
+chitran:
+  first_name: Chi
+  last_name: Tran
+  website: https://scholar.google.com/citations?user=D6WZnA0AAAAJ&hl=en

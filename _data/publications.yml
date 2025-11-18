@@ -1,3 +1,51 @@
+- id: ism
+  title: "Improved Training Technique for Shortcut Models"
+  venue: NeurIPS, 2025
+  description: "An improved version of shortcut model that is much more competitive to other few-step and one-step diffusion models."
+  project_page: 
+  arxiv: 2510.21250v1
+  github:
+  image: ism.png
+  image_mouseover: ism.png
+  authors:
+    - author_id: "anhnguyen"
+      sign: "*"
+    - author_id: "vietnguyen"
+      sign: "*"
+    - author_id: "ducvh"
+      sign: ""
+    - author_id: "trungdt"
+      sign: ""
+    - author_id: "chitran"
+      sign: ""
+    - author_id: "toantran"
+      sign: ""
+    - author_id: "anhtt"
+      sign: ""
+- id: snoopi
+  title: "Supercharged One-step Text-to-Image Diffusion Models with Negative Prompts"
+  venue: ICCV, 2025
+  description: "A simple training-free method to enable negative prompting for one-step diffusion models."
+  project_page: https://snoopi-onestep.github.io/
+  arxiv: 2412.02687
+  github:
+  image: snoopi.jpg
+  image_mouseover: snoopi.jpg
+  authors:
+    - author_id: "vietnguyen"
+      sign: "*"
+    - author_id: "anhnguyen"
+      sign: "*"
+    - author_id: "trungdt"
+      sign: ""
+    - author_id: "khoindm"
+      sign: ""
+    - author_id: "cuongpv"
+      sign: ""
+    - author_id: "toantran"
+      sign: ""
+    - author_id: "anhtt"
+      sign: ""
 - id: selfflow
   title: "Self-Corrected Flow Distillation for Consistent One-Step and Few-Step Image Generation"
   venue: AAAI, 2025
